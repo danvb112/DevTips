@@ -59,7 +59,8 @@ function DevList(){
                     />
                     <Input
                         label='Hora'
-                        name='time'   
+                        name='time' 
+                        type='time'  
                     />
                     <button type='button'>Buscar</button>
                 </form>
