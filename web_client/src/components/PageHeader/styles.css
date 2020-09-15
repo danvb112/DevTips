@@ -46,7 +46,7 @@
 
 .page-header .header-content p {
     max-width: 30rem;
-    font-size: 1.9rem;
+    font: 1.9rem Orbitron;
     line-height: 2.6rem;
     color: var(--color-text-in-primary);
     margin-top: 2.4rem;

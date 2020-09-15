@@ -1,12 +1,11 @@
 import React from 'react';
 import './assets/styles/global.css'
 
-import DevList from './pages/DevList'
-import DevForm from './pages/DevForm'
+import Routes from './routes'
 
 function App() {
   return (
-    <DevForm />
+    <Routes />
   );
 }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 import backIcon from '../../assets/images/icons/back.svg'
 
@@ -13,9 +14,9 @@ const PageHeader: React.FC<PageHeaderProps> = (props) => {
     return(
         <header className="page-header">
             <div className="top-bar-container">
-                <a>
+                <Link to='/'>
                     <img src={backIcon}/>
-                </a>
+                </Link>
                 <strong>{"<DevTips />"}</strong>
             </div>
             <div className="header-content">
