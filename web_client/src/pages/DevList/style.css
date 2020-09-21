@@ -33,14 +33,14 @@
     background: var(--color-secundary-dark);
 }
 
-#page-teacher-list main {
+#page-dev-list main {
     margin: 3.2rem auto;
     width: 90%;
 }
 
 
 @media (min-width: 700px) {
-    #page-teacher-list {
+    #page-dev-list {
         max-width: 100vw;
     }
 
@@ -57,7 +57,7 @@
         margin-top: 0;
     }
 
-    #page-teatcher-list main {
+    #page-dev-list main {
         padding: 3.2rem 0;
         max-width: 740px;
         margin: 0 auto;

@@ -1,33 +1,45 @@
-import React from 'react';
+import React, { useState, FormEvent } from 'react';
 import PageHeader from '../../components/PageHeader'
 import Select from '../../components/Select'
 import Input from '../../components/Input'
-import DevItem from '../../components/DevItem'
-
-import pythonIcon from '../../assets/images/icons/python.svg'
+import DevItem, { DevItens } from '../../components/DevItem'
 
 import './style.css'
+import api from '../../server/api';
 
 
 function DevList(){
 
-    const dev = {
-        id: 1,
-        avatar:'https://avatars1.githubusercontent.com/u/46692326?s=460&u=45213846f6c2800463f9fd34babc6ab432f4cdd9&v=4',
-        name:'Daniel Bonasser',
-        stack:'JavaScript',
-        bio:'Iniciante na área da Programação',
-        cost:'20',
-        whatsapp:'998291996'
+    const [devs, setDevs] = useState([])
+
+    const [stack, setStack] = useState('')
+    const [week_day, setWeekDay] = useState('')
+    const [time, setTime] = useState('')
+
+    async function searchDevs(e: FormEvent) {
+        e.preventDefault()
+
+        const response = await api.get('stacks', {
+            params: {
+                stack,
+                week_day,
+                time
+            }
+        });
+
+        setDevs(response.data)
     }
+    
 
     return (
         <div id='page-dev-list' className='container'>
             <PageHeader title='DevList' description='Esses São os Devs disponíveis'>
-                <form id='search-devs'>
+                <form id='search-devs' onSubmit={searchDevs}>
                     <Select 
                         label='Stack'
                         name='Stack'
+                        value={stack}
+                        onChange={(e)=>{setStack(e.target.value)} }
                         options={[
                             { value: `Python`, label: 'Python' },
                             { value: 'JavaScript', label: 'JavaScript' },
@@ -46,6 +58,8 @@ function DevList(){
                     <Select 
                         label='Dia da semana'
                         name='week_day'
+                        value={week_day}
+                        onChange={(e)=> { setWeekDay(e.target.value) }}
                         options={[
                             { value: '0', label: 'Domingo' },
                             { value: '1', label: 'Segunda-Feira' },
@@ -60,17 +74,19 @@ function DevList(){
                     <Input
                         label='Hora'
                         name='time' 
-                        type='time'  
+                        type='time'
+                        value={time}
+                        onChange={(e)=> {setTime(e.target.value)}}  
                     />
-                    <button type='button'>Buscar</button>
+                    <button type='submit'>Buscar</button>
                 </form>
             </PageHeader>
             
             <main>
-                <DevItem 
-                    devInfo={dev}
-                    
-                />
+                {devs.map((dev: DevItens) => {
+                    return <DevItem key={dev.id} devInfo={dev} />
+                })}
+
             </main>
         </div>
     )

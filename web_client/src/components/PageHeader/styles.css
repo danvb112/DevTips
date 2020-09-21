@@ -21,6 +21,7 @@
 
 .page-header .top-bar-container strong {
     font: 700 1.6rem Orbitron;
+    color: var(--color-secundary);
 }
 
 .page-header .top-bar-container a:hover {
@@ -29,6 +30,7 @@
 
 .top-bar-container .top-bar-container > img {
     height: 1.6rem;
+    
 }
 
 .page-header .header-content {
@@ -41,14 +43,14 @@
 .page-header .header-content strong {
     font: 700 3.6rem Orbitron;
     line-height: 4.2rem;
-    color: var(--color-title-in-primary);
+    color: var(--color-secundary);
 }
 
 .page-header .header-content p {
     max-width: 30rem;
     font: 1.9rem Orbitron;
     line-height: 2.6rem;
-    color: var(--color-text-in-primary);
+    color: var(--color-secundary);
     margin-top: 2.4rem;
 }
 
