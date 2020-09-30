@@ -43,8 +43,8 @@ function DevList(){
                         options={[
                             { value: `Python`, label: 'Python' },
                             { value: 'JavaScript', label: 'JavaScript' },
-                            { value: 'ReactJs', label: 'ReactJs' },
-                            { value: 'NodeJs', label: 'NodeJs' },
+                            { value: 'ReactJS', label: 'ReactJS' },
+                            { value: 'NodeJS', label: 'NodeJS' },
                             { value: 'Java', label: 'Java' },
                             { value: 'Dart', label: 'Dart' },
                             { value: 'MySQL', label: 'MySQL' },                       
@@ -78,7 +78,9 @@ function DevList(){
                         value={time}
                         onChange={(e)=> {setTime(e.target.value)}}  
                     />
-                    <button type='submit'>Buscar</button>
+                    <button type='submit'> 
+                        Buscar
+                     </button>
                 </form>
             </PageHeader>
             

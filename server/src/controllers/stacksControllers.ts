@@ -37,7 +37,7 @@ export default class StacksController {
             const insertStacksIds = await trx('stacks').insert({
                 stack,
                 cost,
-                user_id
+                user_id,
             });
 
             const stack_id = insertStacksIds[0]

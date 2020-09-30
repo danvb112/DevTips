@@ -16,8 +16,8 @@ function DevForm() {
     const history = useHistory()
     const [name, setName] = useState('')
     const [avatar, setAvatar] = useState('')
-    const [bio, setBio] = useState('')
     const [whatsapp, setWhatsapp] = useState('')
+    const [bio, setBio] = useState('')
 
     const [stack, setStack] = useState('')
     const [cost, setCost] = useState('')
@@ -27,15 +27,13 @@ function DevForm() {
     ]);
 
 
-
     function addNewScheduleItem(){
         setScheduleItems([
             ...scheduleItems,
             {week_day: 0, from:'', to:''}
-        ])
+        ]);
     }
 
-    
     function handleCreateStack(e: FormEvent) {
         e.preventDefault()
 
@@ -46,7 +44,7 @@ function DevForm() {
             bio,
             stack,
             cost: Number(cost),
-            shcedule: scheduleItems
+            schedule: scheduleItems
         }).then(() => {
             alert("Cadastro realizado com sucesso")
             history.push('/')
@@ -85,7 +83,7 @@ function DevForm() {
                         name='Nome'
                         type='text'
                         value={name}
-                        onChange={(e)=> setName(e.target.value) }
+                        onChange={(e)=> { setName(e.target.value) } }
                         
                    />
 
@@ -94,7 +92,7 @@ function DevForm() {
                         name='avatar'
                         type='text'
                         value={avatar}
-                        onChange={(e)=> setAvatar(e.target.value) }
+                        onChange={(e)=> { setAvatar(e.target.value) } }
                    />
 
                    <Input 
@@ -102,7 +100,7 @@ function DevForm() {
                         name='whatsapp'
                         type='text'
                         value={whatsapp}
-                        onChange={(e)=> setWhatsapp(e.target.value) }
+                        onChange={(e)=> { setWhatsapp(e.target.value) } }
 
                    />
 
@@ -110,7 +108,7 @@ function DevForm() {
                         label='Bio'
                         name='Biografia'
                         value={bio}
-                        onChange={(e) => setBio(e.target.value) }
+                        onChange={(e) => { setBio(e.target.value) } }
                    />
 
                </fieldset>
@@ -121,21 +119,21 @@ function DevForm() {
 
                 <Select 
                     label='Stack'
-                    name='Stacks'
+                    name='stacks'
                     value={stack}
-                    onChange={(e)=> setStack(e.target.value) }
+                    onChange={(e)=> { setStack(e.target.value) } }
                     options={[
-                        { value: '0', label: 'JavaScript' },
-                        { value: '1', label: 'ReactJS' },
-                        { value: '2', label: 'NodeJS' },
-                        { value: '3', label: 'React Native' },
-                        { value: '4', label: 'Python' },
-                        { value: '5', label: 'C++' },
-                        { value: '6', label: 'C#' },                      
-                        { value: '7', label: 'C' },                      
-                        { value: '8', label: 'Java' },                      
-                        { value: '9', label: 'Dart' },                      
-                        { value: '10', label: 'Flutter' },                                        
+                        { value: 'JavaScript', label: 'JavaScript' },
+                        { value: 'ReactJS', label: 'ReactJS' },
+                        { value: 'NodeJS', label: 'NodeJS' },
+                        { value: 'React Native', label: 'React Native' },
+                        { value: 'Python', label: 'Python' },
+                        { value: 'C++', label: 'C++' },
+                        { value: 'C#', label: 'C#' },                      
+                        { value: 'C', label: 'C' },                      
+                        { value: 'Java', label: 'Java' },                      
+                        { value: 'Dart', label: 'Dart' },                      
+                        { value: 'Flutter', label: 'Flutter' },                                        
 
                     ]}
                 />
@@ -145,7 +143,7 @@ function DevForm() {
                     name='Custo'
                     type='text'
                     value={cost}
-                    onChange={(e)=> setCost(e.target.value) }
+                    onChange={(e)=> { setCost(e.target.value) } }
                 />
                </fieldset>
 
@@ -160,21 +158,20 @@ function DevForm() {
                    {scheduleItems.map((scheduleItem, index) => {
                        return (
                            <div key={scheduleItem.week_day} className="schedule-item">
-                               <Select 
-                        label='Dia da Semana'
-                        name='week_day'
-                        value={scheduleItem.week_day}
-                        onChange={(e)=>{setScheduleItemValue(index, 'week_day', e.target.value)}}
-                        options={[
-                            { value: '0', label: 'Domingo' },
-                            { value: '1', label: 'Segunda-Feira' },
-                            { value: '2', label: 'Terça-Feira' },
-                            { value: '3', label: 'Quarta-Feira' },
-                            { value: '4', label: 'Quinta-Feira' },
-                            { value: '5', label: 'Sexta-feira' },
-                            { value: '6', label: 'Sábado' },                      
-
-                        ]}
+                        <Select 
+                            label='Dia da Semana'
+                            name='week_day'
+                            value={scheduleItem.week_day}
+                            onChange={(e)=>{setScheduleItemValue(index, 'week_day', e.target.value)}}
+                            options={[
+                                { value: '0', label: 'Domingo' },
+                                { value: '1', label: 'Segunda-Feira' },
+                                { value: '2', label: 'Terça-Feira' },
+                                { value: '3', label: 'Quarta-Feira' },
+                                { value: '4', label: 'Quinta-Feira' },
+                                { value: '5', label: 'Sexta-feira' },
+                                { value: '6', label: 'Sábado' },                      
+                            ]}
                    />
 
                    <Input 
@@ -182,7 +179,7 @@ function DevForm() {
                         name='from'
                         type='time'
                         value={scheduleItem.from}
-                        onChange={(e)=>{setScheduleItemValue(index, 'from', e.target.value)}}
+                        onChange={e => setScheduleItemValue(index, 'from', e.target.value)}
                    />
                    
                    <Input 
@@ -190,30 +187,27 @@ function DevForm() {
                         name='to'
                         type='time'
                         value={scheduleItem.to}
-                        onChange={(e)=>{setScheduleItemValue(index, 'to', e.target.value)}}
+                        onChange={e => setScheduleItemValue(index, 'to', e.target.value)}
 
                    />
-                           </div>
+            </div>
                        )
                    })} 
 
    
-                  </fieldset>
-
-                  <footer>
-                      <p>
-                          <img src={warningIcon} alt="Aviso Importante"  />
-                          Importante! <br/>
-                          Preencha todos os dados
-                      </p>
-
-                      <button type='submit' onClick={handleCreateStack}>
-                          Salvar Cadastro
-                      </button>
-                  </footer>
-
-           </main>
-       </div> 
+        </fieldset>
+        <footer>
+            <p>
+                <img src={warningIcon} alt="Aviso Importante"  />
+                Importante! <br/>
+                Preencha todos os dados
+            </p>
+            <button type='submit' onClick={handleCreateStack}>
+                Salvar Cadastro
+            </button>
+        </footer>
+    </main>
+    </div> 
     )
 }
 
