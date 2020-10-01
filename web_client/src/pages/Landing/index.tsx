@@ -27,7 +27,7 @@ function Landing(){
                 />
 
                 <div className="buttons-container">
-                    <Link to='/dev-list' className='get-tips'>
+                    <Link to='/landing-login' className='get-tips'>
                         <img src={DevIcon} alt="developer-icon"/>
                         Pegar Dicas
                     </Link>

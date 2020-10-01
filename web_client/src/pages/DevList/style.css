@@ -36,6 +36,10 @@
 #page-dev-list main {
     margin: 3.2rem auto;
     width: 90%;
+
+    animation: devIemAnimation 1.5s;
+    animation-fill-mode: backwards;
+
 }
 
 

@@ -4,6 +4,9 @@
     margin-top: 2.8rem;
     border-radius: 0.8rem;
     overflow: hidden;
+
+    animation: devItemAnimation 1.5s;
+    animation-fill-mode: backwards;
 }
 
 .Dev-item header {
@@ -98,5 +101,17 @@
 
     .Dev-item footer button img {
         margin-right: 1.6rem;
+    }
+}
+
+/* Animação */
+
+@keyframes devIemAnimation {
+    from {
+        opacity: 0;
+        transform: translateY(35%);
+    }to {
+        opacity: 1;
+        transform: translateY(0%);
     }
 }
