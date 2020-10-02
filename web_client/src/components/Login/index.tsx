@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { Link } from 'react-router-dom'
+
 import Input from '../Input'
 
 import emailIcon from '../../assets/images/icons/email.svg'
@@ -19,10 +21,10 @@ function Login() {
                 <Input label='Email' name='email' type='text' />
                 <br></br>
                 <img src={lockIcon} alt="lock"/>
-                <Input label='Senha' name='senha' type='text' />
+                <Input label='Senha' name='senha' type='password' />
             </div>
             <div className="buttons-login">
-                <a>Cadastrar</a>
+                <Link to='/user-form'>Cadastrar</Link>
                 <button type='submit'>Login</button>
             </div>
         </article>

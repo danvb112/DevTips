@@ -25,19 +25,19 @@ export default class StacksController {
 
         try {
             
-            const insertUsersIds = await trx('users').insert({
+            const insertDevsIds = await trx('devs').insert({
                 name,
                 avatar,
                 bio,
                 whatsapp,
             });
 
-            const user_id = insertUsersIds[0];
+            const dev_id = insertDevsIds[0];
 
             const insertStacksIds = await trx('stacks').insert({
                 stack,
                 cost,
-                user_id,
+                dev_id,
             });
 
             const stack_id = insertStacksIds[0]
@@ -90,8 +90,8 @@ export default class StacksController {
                 .whereRaw('`stack_schedule`.`to` > ??', [timeInMinutes])
             })
             .where('stacks.stack', '=', stack)
-            .join('users', 'user_id', '=', 'users.id')
-            .select(['stacks.*', 'users.*']);
+            .join('devs', 'dev_id', '=', 'devs.id')
+            .select(['stacks.*', 'devs.*']);
         
         return response.json(stacks)
     }
