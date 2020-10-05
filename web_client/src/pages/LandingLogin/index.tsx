@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useState, FormEvent } from 'react'
+import { useHistory } from 'react-router-dom'
+import api from '../../server/api'
 import { Link } from 'react-router-dom'
 
 import LandingImg from '../../assets/images/landing.svg'
@@ -9,7 +11,7 @@ import './styles.css'
 
 
 function LandingLogin(){
-    
+
     const nameProject = "<DevTips />"
     return (
         <div id="page-landing-login">
