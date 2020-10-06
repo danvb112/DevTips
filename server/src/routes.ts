@@ -11,6 +11,7 @@ routes.post('/stacks', stacksController.create)
 routes.get('/stacks', stacksController.index)
 
 routes.post('/users', usersController.create)
+routes.get('/users', usersController.verify)
 
 
 export default routes;

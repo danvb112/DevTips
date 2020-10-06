@@ -14,14 +14,23 @@ import './styles.css'
 
 function Login() {
 
+    const history = useHistory()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     function handleVerifyUser(e: FormEvent) {
-        e.preventDefault(
-            
+        e.preventDefault()
 
-        )
+        api.get('users', {
+            params: {
+                email,
+                password
+            }
+        }).then(() => {
+            history.push('/dev-list')
+        }).catch(() => {
+            alert("Email ou senha incorretos!")
+        })
     }
     
 
