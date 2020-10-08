@@ -1,12 +1,11 @@
-import Knex from 'knex';
+import { raw } from 'express'
+import Knex from 'knex'
 
 export async function up(knex: Knex){
     return knex.schema.createTable('devs', table => {
         table.increments('id').primary()
-        table.string('name').notNullable()
-        table.string('avatar').notNullable()
-        table.string('bio').notNullable()
-        table.string('whatsapp').notNullable()
+        table.string('email').notNullable()
+        table.string('password').notNullable()
 
     })
 }

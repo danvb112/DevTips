@@ -27,12 +27,12 @@ function Landing(){
                 />
 
                 <div className="buttons-container">
-                    <Link to='/landing-login' className='get-tips'>
+                    <Link to='/landing-login-user' className='get-tips'>
                         <img src={DevIcon} alt="developer-icon"/>
                         Pegar Dicas
                     </Link>
 
-                    <Link to='/dev-form' className='give-tips'>
+                    <Link to='/landing-login-dev' className='give-tips'>
                         <img src={TeacherIcon} alt="teacher-icon" />
                         Dar Dicas
                     </Link>

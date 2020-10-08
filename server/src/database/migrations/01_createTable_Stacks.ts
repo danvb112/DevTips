@@ -6,10 +6,10 @@ export async function up(knex: Knex){
         table.string('stack').notNullable()
         table.decimal('cost').notNullable()
 
-        table.integer('dev_id')
+        table.integer('tip_id')
             .notNullable()
             .references('id')
-            .inTable('devs')
+            .inTable('dev_tips')
             .onDelete('CASCADE')
             .onUpdate('CASCADE')
         

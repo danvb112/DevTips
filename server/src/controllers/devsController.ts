@@ -1,0 +1,35 @@
+import { Request, Response } from 'express'
+import db from '../database/connections'
+
+export default class DevsController {
+
+    async create(request: Request, response: Response) {
+
+        const {
+            email,
+            password
+
+        } = request.body
+
+        const trx = await db.transaction()
+
+        try {
+            
+            await trx('devs').insert({
+                email,
+                password
+            })
+
+            trx.commit()
+            return response.status(200).send()
+
+        } catch (error) {
+            await trx.rollback()
+
+            return response.status(400).json({
+                error: "Unexpected erro while creating new dev"
+            })       
+        }
+    }
+
+}

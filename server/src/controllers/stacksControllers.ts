@@ -18,32 +18,38 @@ export default class StacksController {
             whatsapp,
             stack,
             cost,
-            schedule
+            schedule,
+            password
          } = request.body
+
+        const loginDatas = await db('devs').where('password', password)
+
+        const dev_id = loginDatas[0]['id']
 
         const trx = await db.transaction()
 
         try {
-            
-            const insertDevsIds = await trx('devs').insert({
+
+            const insertTipsIds = await trx('dev_tips').insert({
                 name,
                 avatar,
                 bio,
                 whatsapp,
+                dev_id
             });
 
-            const dev_id = insertDevsIds[0];
+            const tip_id = insertTipsIds[0];
 
             const insertStacksIds = await trx('stacks').insert({
                 stack,
                 cost,
-                dev_id,
+                tip_id,
             });
 
             const stack_id = insertStacksIds[0]
 
             const stackSchedule = schedule.map((scheduleItem: ScheduleItem) => {
-               return { 
+                return { 
                 stack_id,
                 week_day: scheduleItem.week_day,
                 from: convertHourToMinutes(scheduleItem.from),
@@ -55,7 +61,6 @@ export default class StacksController {
             await trx.commit()
 
             return response.status(201).send()
-
 
         } catch (error) {
             await trx.rollback()
@@ -90,8 +95,8 @@ export default class StacksController {
                 .whereRaw('`stack_schedule`.`to` > ??', [timeInMinutes])
             })
             .where('stacks.stack', '=', stack)
-            .join('devs', 'dev_id', '=', 'devs.id')
-            .select(['stacks.*', 'devs.*']);
+            .join('dev_tips', 'tip_id', '=', 'dev_tips.id')
+            .select(['stacks.*', 'dev_tips.*']);
         
         return response.json(stacks)
     }
