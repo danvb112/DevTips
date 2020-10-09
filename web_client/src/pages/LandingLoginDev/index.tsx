@@ -24,13 +24,13 @@ function LandingLoginDev(){
     function handleVerifyDev(e: FormEvent) {
         e.preventDefault()
 
-        api.get('users', {
+        api.get('devs', {
             params: {
                 email,
                 password
             }
         }).then(() => {
-            history.push('/dev-list')
+            history.push('/dev-page')
         }).catch(() => {
             alert("Email ou senha incorretos!")
         })
@@ -75,7 +75,7 @@ function LandingLoginDev(){
                             />
                         </div>
                         <div className="buttons-login">
-                            <Link to='/user-form'>Cadastrar</Link>
+                            <Link to='/register-dev'>Cadastrar</Link>
                             <button type='submit' onClick={handleVerifyDev} >Login</button>
                         </div>
                 </article>

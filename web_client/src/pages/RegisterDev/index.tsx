@@ -9,23 +9,21 @@ import warningIcon from '../../assets/images/icons/warning.svg'
 
 import './styles.css'
 
-function UserForm() {
+function RegisterDev() {
 
     const history = useHistory()
-    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     
-    function handleCreateUser(e: FormEvent) {
+    function handleCreateDev(e: FormEvent) {
         e.preventDefault()
 
-        api.post('users', {
-            name,
+        api.post('devs', {
             email,
             password
         }).then(() => {
             alert('Cadastro Realizado com sucesso')
-            history.push('/landing-login-user')
+            history.push('/landing-login-dev')
         }).catch(() => {
             alert('Erro ao Realizar o cadastro')
         })
@@ -41,13 +39,6 @@ function UserForm() {
             <main>
                 <fieldset>
                     <legend>Seus Dados</legend>
-                    
-                    <Input 
-                        label='Nome Completo'
-                        name='nome'
-                        type='text'
-                        onChange={(e) => { setName(e.target.value) }}
-                    />
 
                     <Input 
                         label='Email'
@@ -70,7 +61,7 @@ function UserForm() {
                         Importante! <br/>
                         Preencha todos os dados
                     </p>
-                    <button type='submit' onClick={handleCreateUser}>
+                    <button type='submit' onClick={handleCreateDev}>
                         Salvar Cadastro
                     </button>
                 </footer>
@@ -80,4 +71,4 @@ function UserForm() {
     )
 }
 
-export default UserForm;
+export default RegisterDev;

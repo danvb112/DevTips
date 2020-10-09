@@ -16,6 +16,7 @@ routes.post('/users', usersController.create)
 routes.get('/users', usersController.verify)
 
 routes.post('/devs', devsController.create)
+routes.get('/devs', devsController.verify)
 
 
 

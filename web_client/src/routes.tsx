@@ -7,6 +7,8 @@ import DevList from './pages/DevList'
 import LandingLoginUser from './pages/LandingLoginUser'
 import LandingLoginDev from './pages/LandingLoginDev'
 import UserForm from './pages/UserForm'
+import RegisterDev from './pages/RegisterDev'
+import DevPage from './pages/DevPage'
 
 function Routes() {
     return(
@@ -18,6 +20,8 @@ function Routes() {
                 <Route path='/dev-list' component={DevList} />
                 <Route path='/dev-form' component={DevForm} />
                 <Route path='/user-form' component={UserForm} />
+                <Route path='/register-dev' component={RegisterDev} />
+                <Route path='/dev-page' component={DevPage} />
             </Switch>
         </BrowserRouter>
     )
