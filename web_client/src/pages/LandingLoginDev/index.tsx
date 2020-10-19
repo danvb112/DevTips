@@ -29,8 +29,10 @@ function LandingLoginDev(){
                 email,
                 password
             }
-        }).then(() => {
-            history.push('/dev-page')
+        }).then((response) => {
+            const { id } =  response.data
+            console.log(id)
+            history.push(`/dev-page/${id}`)
         }).catch(() => {
             alert("Email ou senha incorretos!")
         })

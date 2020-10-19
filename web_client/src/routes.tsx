@@ -21,7 +21,7 @@ function Routes() {
                 <Route path='/dev-form' component={DevForm} />
                 <Route path='/user-form' component={UserForm} />
                 <Route path='/register-dev' component={RegisterDev} />
-                <Route path='/dev-page' component={DevPage} />
+                <Route path='/dev-page/:id' component={DevPage} />
             </Switch>
         </BrowserRouter>
     )

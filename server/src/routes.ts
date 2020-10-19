@@ -17,7 +17,7 @@ routes.get('/users', usersController.verify)
 
 routes.post('/devs', devsController.create)
 routes.get('/devs', devsController.verify)
-
+routes.get('/devs/:id', devsController.show)
 
 
 export default routes;

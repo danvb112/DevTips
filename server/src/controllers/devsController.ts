@@ -50,11 +50,14 @@ export default class DevsController {
 
             const loginDatas = await db('devs').where('email', email)
 
+            const idDev = loginDatas[0]['id']
             const emailBanco = loginDatas[0]['email']
             const passwordBanco = loginDatas[0]['password']
 
             if(email == emailBanco && password == passwordBanco){
-                return response.status(200).send()
+                return response.status(200).json({
+                    id: idDev
+                })
             }else {
                 return response.status(400).send()
             }
@@ -65,6 +68,23 @@ export default class DevsController {
             })
         }
         
+    }
+
+    async show(request: Request, response: Response) {
+
+        const { id } = request.params
+
+
+        const devInfo = await db('devs').whereRaw('devs.id = ?', [id])
+            .join('dev_tips', 'devs.id', '=', 'dev_tips.dev_id' )
+            .join('stacks', 'dev_tips.id', '=', 'stacks.tip_id')
+            .join('stack_schedule', 'stacks.id', '=', 'stack_schedule.stack_id')
+            .select('dev_tips.*', 'stacks.*', 'stack_schedule.*')
+            
+        console.log(devInfo)
+
+        return response.status(200).send(devInfo)
+
     }
 
 }
