@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import { FiPlus } from 'react-icons/fi'
+import moment from 'moment';
+import { Link, useParams } from 'react-router-dom'
+import { FiPlus, FiX } from 'react-icons/fi'
 
 import PageHeader from '../../components/PageHeader'
 
 import api from '../../server/api'
 
 import './styles.css'
+
 
 interface DevParams {
     id: string
@@ -22,7 +24,9 @@ interface DevTip {
     week_day: number;
     from: number;
     to: number;
-    
+    dev_id: number;
+    id: number;
+
 }
 
 function DevPage() {
@@ -31,16 +35,46 @@ function DevPage() {
 
     const [devTips, setDevTips] = useState<DevTip[]>([])
 
+    const diasSemana = [
+        { value: 0, label: 'Domingo' },
+        { value: 1, label: 'Segunda-Feira' },
+        { value: 2, label: 'Terça-Feira' },
+        { value: 3, label: 'Quarta-Feira' },
+        { value: 4, label: 'Quinta-Feira' },
+        { value: 5, label: 'Sexta-feira' },
+        { value: 6, label: 'Sábado' },                      
+    ]
 
-    useEffect( () => {
-        api.get(`devs/:${params.id}`)
-            .then(response => {
-                console.log(response.data)
-                setDevTips(response.data)
-            })
-    }, [params.id])
+    
 
-    if(!devTips) {
+    async function loadTips() {
+        const response = await api.get(`/devs/${params.id}`)
+        setDevTips(response.data)
+        return response
+    }
+
+    async function handleDeleteTip(dev_id: number, id: number) {
+        const response = await api.delete(`/stacks/${dev_id}/${id}`)
+
+        return response.status
+    }
+
+    function convertMinutesToHour(mins: number) {
+        if (mins >= 24 * 60 || mins < 0) {
+            throw new RangeError("Valid input should be greater than or equal to 0 and less than 1440.");
+        }
+        var h = mins / 60 | 0,
+            m = mins % 60 | 0;
+        return moment.utc().hours(h).minutes(m).format("hh:mm A");
+    }
+
+    useEffect(() => {
+        loadTips()
+    }, [params.id, devTips])
+
+
+
+    if (!devTips) {
         return <p>Carregando...</p>
     }
 
@@ -51,10 +85,11 @@ function DevPage() {
             <PageHeader
                 title='E aí Dev beleza?, seja bem vindo!'
                 description='Aqui você pode gerenciar suas Tips, adicionando novas ou retirando as já existentes.'
+                backTo='/landing-login-dev'
             />
 
             <main>
-            {devTips.map(tip => {
+                {devTips.map(tip => {
                     return (
                         <article className='Dev-tip'>
                             <header>
@@ -72,20 +107,33 @@ function DevPage() {
                                     Preço/hora
                                     <strong>{tip.cost}</strong>
                                 </p>
-                                {/* <a
-                                    target='blank'
-                                    href={`https://wa.me/${devInfo.whatsapp}`}
-                                >
-                                    <img src={whatsappIcon}></img>
-                                    Entrar em contato
-                            </a> */}
+                                <p>
+                                    {diasSemana.map(dia => {
+                                        if(dia.value == tip.week_day) {
+                                            return <strong>{dia.label}</strong>
+                                        }
+                                    })}
+                                    <br/>
+                                    Das: 
+                                    <strong>{convertMinutesToHour(tip.from)}</strong>
+                                    <br/>
+                                    Até: 
+                                    <strong>{convertMinutesToHour(tip.to)}</strong>
+                                </p>
+                                <p>Whatsapp:
+                                    <strong>{tip.whatsapp}</strong>
+                                </p>
+                                <button type='submit' onClick={() => handleDeleteTip(tip.dev_id, tip.id)}>
+                                    <FiX size="32" color="#ff1744" />
+                                </button>
                             </footer>
                         </article>
-                )})}
+                    )
+                })}
 
-            <a>
-                <FiPlus size={32} color="#fff" />
-            </a>
+                <Link to='/dev-form'>
+                    <FiPlus size={32} color='#04D361' />
+                </Link>
             </main>
         </div>
     )

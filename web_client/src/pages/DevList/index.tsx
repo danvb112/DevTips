@@ -33,7 +33,7 @@ function DevList(){
 
     return (
         <div id='page-dev-list' className='container'>
-            <PageHeader title='DevList' description='Esses São os Devs disponíveis'>
+            <PageHeader title='DevList' description='Esses São os Devs disponíveis' backTo='/landing-login-user'>
                 <form id='search-devs' onSubmit={searchDevs}>
                     <Select 
                         label='Stack'

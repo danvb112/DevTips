@@ -80,8 +80,6 @@ export default class DevsController {
             .join('stacks', 'dev_tips.id', '=', 'stacks.tip_id')
             .join('stack_schedule', 'stacks.id', '=', 'stack_schedule.stack_id')
             .select('dev_tips.*', 'stacks.*', 'stack_schedule.*')
-            
-        console.log(devInfo)
 
         return response.status(200).send(devInfo)
 

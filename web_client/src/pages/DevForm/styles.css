@@ -20,6 +20,10 @@
     animation-fill-mode: backwards;
 }
 
+#page-dev-form main .password-confirm {
+    padding-top: 6.4rem;
+}
+
 #page-dev-form main fieldset {
     border: 0;
     padding: 0 2.4rem;

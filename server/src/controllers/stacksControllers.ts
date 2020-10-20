@@ -60,7 +60,7 @@ export default class StacksController {
 
             await trx.commit()
 
-            return response.status(201).send()
+            return response.status(201).json({ dev_id })
 
         } catch (error) {
             await trx.rollback()
@@ -100,4 +100,19 @@ export default class StacksController {
         
         return response.json(stacks)
     }
+
+    async delete(request: Request, response: Response){
+
+        const { 
+            idDev,
+            idTip
+        
+        } = request.params
+
+        await db('dev_tips').whereRaw('dev_tips.dev_id = ?', [idDev])
+            .whereRaw('dev_tips.id = ?', [idTip]).del()
+
+        return response.status(200)
+    }
+
 }

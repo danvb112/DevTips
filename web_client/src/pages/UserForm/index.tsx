@@ -36,6 +36,7 @@ function UserForm() {
             <PageHeader 
                 title='Bem Vindo a <DevTips />'
                 description='Primeiro preencha o formulário com seus dados'
+                backTo='/landing-login-dev'
             />
 
             <main>

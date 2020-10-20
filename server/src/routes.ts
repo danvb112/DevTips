@@ -11,6 +11,7 @@ const devsController = new DevsController()
 
 routes.post('/stacks', stacksController.create)
 routes.get('/stacks', stacksController.index)
+routes.delete('/stacks/:idDev/:idTip', stacksController.delete)
 
 routes.post('/users', usersController.create)
 routes.get('/users', usersController.verify)
