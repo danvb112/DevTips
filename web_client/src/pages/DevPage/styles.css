@@ -34,7 +34,7 @@
 #page-dev main article {
     width: 100%;
 
-    animation: devIemAnimation 1.5s;
+    animation: devIemAnimation 2s;
     animation-fill-mode: backwards;
 }
 
