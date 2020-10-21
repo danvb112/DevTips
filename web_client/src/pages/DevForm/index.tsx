@@ -119,7 +119,7 @@ function DevForm() {
 
                 <fieldset>
 
-                    <legend>Sobbre a dica</legend>
+                    <legend>Sobre a dica</legend>
 
                     <Select
                         label='Stack'
