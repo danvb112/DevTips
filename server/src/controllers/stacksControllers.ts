@@ -10,8 +10,8 @@ interface ScheduleItem {
 
 export default class StacksController {
 
-    async create(request: Request, response: Response){
-        const { 
+    async create(request: Request, response: Response) {
+        const {
             name,
             avatar,
             bio,
@@ -20,12 +20,12 @@ export default class StacksController {
             cost,
             schedule,
             password
-         } = request.body
+        } = request.body
 
         const loginDatas = await db('devs').where('password', password)
 
         const dev_id = loginDatas[0]['id']
-
+        
         const trx = await db.transaction()
 
         try {
@@ -49,12 +49,13 @@ export default class StacksController {
             const stack_id = insertStacksIds[0]
 
             const stackSchedule = schedule.map((scheduleItem: ScheduleItem) => {
-                return { 
-                stack_id,
-                week_day: scheduleItem.week_day,
-                from: convertHourToMinutes(scheduleItem.from),
-                to: convertHourToMinutes(scheduleItem.to)
-            }})
+                return {
+                    stack_id,
+                    week_day: scheduleItem.week_day,
+                    from: convertHourToMinutes(scheduleItem.from),
+                    to: convertHourToMinutes(scheduleItem.to)
+                }
+            })
 
             await trx('stack_schedule').insert(stackSchedule)
 
@@ -70,43 +71,43 @@ export default class StacksController {
         }
     }
 
-    async index(request: Request, response: Response){
+    async index(request: Request, response: Response) {
         const filters = request.query;
 
         const stack = filters.stack as string;
         const week_day = filters.week_day as string;
         const time = filters.time as string;
 
-        if(!filters.week_day || !filters.stack || !filters.time) {
+        if (!filters.week_day || !filters.stack || !filters.time) {
             return response.status(400).json({
                 error: "Missing filters to search Devs"
             });
         }
 
         const timeInMinutes = convertHourToMinutes(time);
-        
+
         const stacks = await db('stacks')
-            .whereExists(function(){
+            .whereExists(function () {
                 this.select('stack_schedule.*')
-                .from('stack_schedule')
-                .whereRaw('`stack_schedule`.`stack_id` = `stacks`.`id`')
-                .whereRaw('`stack_schedule`.`week_day` = ??', [Number(week_day)])
-                .whereRaw('`stack_schedule`.`from` <= ??', [timeInMinutes])
-                .whereRaw('`stack_schedule`.`to` > ??', [timeInMinutes])
+                    .from('stack_schedule')
+                    .whereRaw('`stack_schedule`.`stack_id` = `stacks`.`id`')
+                    .whereRaw('`stack_schedule`.`week_day` = ??', [Number(week_day)])
+                    .whereRaw('`stack_schedule`.`from` <= ??', [timeInMinutes])
+                    .whereRaw('`stack_schedule`.`to` > ??', [timeInMinutes])
             })
             .where('stacks.stack', '=', stack)
             .join('dev_tips', 'tip_id', '=', 'dev_tips.id')
             .select(['stacks.*', 'dev_tips.*']);
-        
+
         return response.json(stacks)
     }
 
-    async delete(request: Request, response: Response){
+    async delete(request: Request, response: Response) {
 
-        const { 
+        const {
             idDev,
             idTip
-        
+
         } = request.params
 
         await db('dev_tips').whereRaw('dev_tips.dev_id = ?', [idDev])

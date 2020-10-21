@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 import api from '../../server/api'
 
 import { Link } from 'react-router-dom'
+import backIcon from '../../assets/images/icons/back.svg'
 
 import Input from '../Input'
 

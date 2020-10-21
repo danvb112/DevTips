@@ -18,6 +18,17 @@
     justify-content: center;   
 }
 
+.login-title a {
+    height: 3.2rem;
+    transition: opacity 0.2s;
+}
+
+.login-title a:hover {
+    opacity: 0.6;
+}
+
+
+
 .login-title strong {
     font: 700 4.0rem Orbitron;
     color: var(--color-secundary);
